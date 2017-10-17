@@ -20,7 +20,7 @@ import com.github.mikephil.charting.renderer.BarChartRenderer;
  * @author Philipp Jahoda
  */
 public class BarChart extends BarLineChartBase<BarData> implements BarDataProvider {
-
+//ee
     /**
      * flag that indicates whether the highlight should be full-bar oriented, or single-value?
      */
