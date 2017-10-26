@@ -1,17 +1,14 @@
-
 package com.github.mikephil.charting.data;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.util.Log;
-
 import com.github.mikephil.charting.formatter.DefaultFillFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +60,7 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
     private boolean mDrawCircles = true;
 
     private boolean mDrawCircleHole = true;
-
+    private int[] circlePositions;
 
     public LineDataSet(List<Entry> yVals, String label) {
         super(yVals, label);
@@ -82,8 +79,7 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
         mCircleColors.add(Color.rgb(140, 234, 255));
     }
 
-    @Override
-    public DataSet<Entry> copy() {
+    @Override public DataSet<Entry> copy() {
 
         List<Entry> yVals = new ArrayList<Entry>();
 
@@ -107,18 +103,13 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
 
     /**
      * Returns the drawing mode for this line dataset
-     *
-     * @return
      */
-    @Override
-    public LineDataSet.Mode getMode() {
+    @Override public LineDataSet.Mode getMode() {
         return mMode;
     }
 
     /**
      * Returns the drawing mode for this LineDataSet
-     *
-     * @return
      */
     public void setMode(LineDataSet.Mode mode) {
         mMode = mode;
@@ -127,30 +118,22 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
     /**
      * Sets the intensity for cubic lines (if enabled). Max = 1f = very cubic,
      * Min = 0.05f = low cubic effect, Default: 0.2f
-     *
-     * @param intensity
      */
     public void setCubicIntensity(float intensity) {
 
-        if (intensity > 1f)
-            intensity = 1f;
-        if (intensity < 0.05f)
-            intensity = 0.05f;
+        if (intensity > 1f) intensity = 1f;
+        if (intensity < 0.05f) intensity = 0.05f;
 
         mCubicIntensity = intensity;
     }
 
-    @Override
-    public float getCubicIntensity() {
+    @Override public float getCubicIntensity() {
         return mCubicIntensity;
     }
-
 
     /**
      * Sets the radius of the drawn circles.
      * Default radius = 4f, Min = 1f
-     *
-     * @param radius
      */
     public void setCircleRadius(float radius) {
 
@@ -161,16 +144,13 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
         }
     }
 
-    @Override
-    public float getCircleRadius() {
+    @Override public float getCircleRadius() {
         return mCircleRadius;
     }
 
     /**
      * Sets the hole radius of the drawn circles.
      * Default radius = 2f, Min = 0.5f
-     *
-     * @param holeRadius
      */
     public void setCircleHoleRadius(float holeRadius) {
 
@@ -181,8 +161,7 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
         }
     }
 
-    @Override
-    public float getCircleHoleRadius() {
+    @Override public float getCircleHoleRadius() {
         return mCircleHoleRadius;
     }
 
@@ -191,19 +170,15 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
      * default size = 4f
      * <p/>
      * This method is deprecated because of unclarity. Use setCircleRadius instead.
-     *
-     * @param size
      */
-    @Deprecated
-    public void setCircleSize(float size) {
+    @Deprecated public void setCircleSize(float size) {
         setCircleRadius(size);
     }
 
     /**
      * This function is deprecated because of unclarity. Use getCircleRadius instead.
      */
-    @Deprecated
-    public float getCircleSize() {
+    @Deprecated public float getCircleSize() {
         return getCircleRadius();
     }
 
@@ -212,13 +187,13 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
      * "- - - - - -". THIS ONLY WORKS IF HARDWARE-ACCELERATION IS TURNED OFF.
      * Keep in mind that hardware acceleration boosts performance.
      *
-     * @param lineLength  the length of the line pieces
+     * @param lineLength the length of the line pieces
      * @param spaceLength the length of space in between the pieces
-     * @param phase       offset, in degrees (normally, use 0)
+     * @param phase offset, in degrees (normally, use 0)
      */
     public void enableDashedLine(float lineLength, float spaceLength, float phase) {
-        mDashPathEffect = new DashPathEffect(new float[]{
-                lineLength, spaceLength
+        mDashPathEffect = new DashPathEffect(new float[] {
+            lineLength, spaceLength
         }, phase);
     }
 
@@ -229,40 +204,31 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
         mDashPathEffect = null;
     }
 
-    @Override
-    public boolean isDashedLineEnabled() {
+    @Override public boolean isDashedLineEnabled() {
         return mDashPathEffect == null ? false : true;
     }
 
-    @Override
-    public DashPathEffect getDashPathEffect() {
+    @Override public DashPathEffect getDashPathEffect() {
         return mDashPathEffect;
     }
 
     /**
      * set this to true to enable the drawing of circle indicators for this
      * DataSet, default true
-     *
-     * @param enabled
      */
     public void setDrawCircles(boolean enabled) {
         this.mDrawCircles = enabled;
     }
 
-    @Override
-    public boolean isDrawCirclesEnabled() {
+    @Override public boolean isDrawCirclesEnabled() {
         return mDrawCircles;
     }
 
-    @Deprecated
-    @Override
-    public boolean isDrawCubicEnabled() {
+    @Deprecated @Override public boolean isDrawCubicEnabled() {
         return mMode == Mode.CUBIC_BEZIER;
     }
 
-    @Deprecated
-    @Override
-    public boolean isDrawSteppedEnabled() {
+    @Deprecated @Override public boolean isDrawSteppedEnabled() {
         return mMode == Mode.STEPPED;
     }
 
@@ -270,20 +236,16 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
 
     /**
      * returns all colors specified for the circles
-     *
-     * @return
      */
     public List<Integer> getCircleColors() {
         return mCircleColors;
     }
 
-    @Override
-    public int getCircleColor(int index) {
+    @Override public int getCircleColor(int index) {
         return mCircleColors.get(index);
     }
 
-    @Override
-    public int getCircleColorCount() {
+    @Override public int getCircleColorCount() {
         return mCircleColors.size();
     }
 
@@ -293,8 +255,6 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
      * is higher than the size of the colors array. Make sure that the colors
      * are already prepared (by calling getResources().getColor(...)) before
      * adding them to the DataSet.
-     *
-     * @param colors
      */
     public void setCircleColors(List<Integer> colors) {
         mCircleColors = colors;
@@ -306,8 +266,6 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
      * is higher than the size of the colors array. Make sure that the colors
      * are already prepared (by calling getResources().getColor(...)) before
      * adding them to the DataSet.
-     *
-     * @param colors
      */
     public void setCircleColors(int... colors) {
         this.mCircleColors = ColorTemplate.createColors(colors);
@@ -320,8 +278,6 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
      * "new String[] { R.color.red, R.color.green, ... }" to provide colors for
      * this method. Internally, the colors are resolved using
      * getResources().getColor(...)
-     *
-     * @param colors
      */
     public void setCircleColors(int[] colors, Context c) {
 
@@ -338,11 +294,17 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
         mCircleColors = clrs;
     }
 
+    public void setCirclePositionsBottom(int... positions) {
+        this.circlePositions = positions;
+    }
+
+    public int[] getCirclePositionsBottom() {
+        return circlePositions;
+    }
+
     /**
      * Sets the one and ONLY color that should be used for this DataSet.
      * Internally, this recreates the colors array and adds the specified color.
-     *
-     * @param color
      */
     public void setCircleColor(int color) {
         resetCircleColors();
@@ -361,55 +323,44 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
 
     /**
      * Sets the color of the inner circle of the line-circles.
-     *
-     * @param color
      */
     public void setCircleColorHole(int color) {
         mCircleColorHole = color;
     }
 
-    @Override
-    public int getCircleHoleColor() {
+    @Override public int getCircleHoleColor() {
         return mCircleColorHole;
     }
 
     /**
      * Set this to true to allow drawing a hole in each data circle.
-     *
-     * @param enabled
      */
     public void setDrawCircleHole(boolean enabled) {
         mDrawCircleHole = enabled;
     }
 
-    @Override
-    public boolean isDrawCircleHoleEnabled() {
+    @Override public boolean isDrawCircleHoleEnabled() {
         return mDrawCircleHole;
     }
 
     /**
      * Sets a custom IFillFormatter to the chart that handles the position of the
      * filled-line for each DataSet. Set this to null to use the default logic.
-     *
-     * @param formatter
      */
     public void setFillFormatter(IFillFormatter formatter) {
 
-        if (formatter == null)
+        if (formatter == null) {
             mFillFormatter = new DefaultFillFormatter();
-        else
+        } else {
             mFillFormatter = formatter;
+        }
     }
 
-    @Override
-    public IFillFormatter getFillFormatter() {
+    @Override public IFillFormatter getFillFormatter() {
         return mFillFormatter;
     }
 
     public enum Mode {
-        LINEAR,
-        STEPPED,
-        CUBIC_BEZIER,
-        HORIZONTAL_BEZIER
+        LINEAR, STEPPED, CUBIC_BEZIER, HORIZONTAL_BEZIER
     }
 }

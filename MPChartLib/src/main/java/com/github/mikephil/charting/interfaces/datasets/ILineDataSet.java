@@ -32,6 +32,7 @@ public interface ILineDataSet extends ILineRadarDataSet<Entry> {
     @Deprecated
     boolean isDrawSteppedEnabled();
 
+    int[] getCirclePositionsBottom();
     /**
      * Returns the size of the drawn circles.
      */
