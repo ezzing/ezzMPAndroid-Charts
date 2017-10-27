@@ -61,6 +61,7 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
 
     private boolean mDrawCircleHole = true;
     private int[] circlePositions;
+    private boolean dropDownToZero;
 
     public LineDataSet(List<Entry> yVals, String label) {
         super(yVals, label);
@@ -358,6 +359,14 @@ public class LineDataSet extends LineRadarDataSet<Entry> implements ILineDataSet
 
     @Override public IFillFormatter getFillFormatter() {
         return mFillFormatter;
+    }
+
+    public void setDropDownToZero(boolean dropDownToZero) {
+        this.dropDownToZero = dropDownToZero;
+    }
+
+    public boolean isDropDownToZero() {
+        return dropDownToZero;
     }
 
     public enum Mode {

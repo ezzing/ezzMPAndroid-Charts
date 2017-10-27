@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -146,7 +148,15 @@ public class LineChartRenderer extends LineRadarRenderer {
 
                 final float cpx = (prev.getX()) + (cur.getX() - prev.getX()) / 2.0f;
 
-                cubicPath.cubicTo(cpx, prev.getY() * phaseY, cpx, cur.getY() * phaseY, cur.getX(), cur.getY() * phaseY);
+                if (dataSet.isDropDownToZero()){
+                    if (cur.getY()!=0 ){
+                        cubicPath.cubicTo(cpx, prev.getY() * phaseY, cpx, cur.getY() * phaseY, cur.getX(), cur.getY() * phaseY);
+                    } else if(prev.getY()!=0){
+                        cubicPath.cubicTo(prev.getX(), -1 * phaseY, prev.getX(), -1 * phaseY, prev.getX(), -1 * phaseY);
+                    }
+                }else{
+                    cubicPath.cubicTo(cpx, prev.getY() * phaseY, cpx, cur.getY() * phaseY, cur.getX(), cur.getY() * phaseY);
+                }
             }
         }
 
